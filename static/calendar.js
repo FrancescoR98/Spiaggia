@@ -1,7 +1,9 @@
 function loadGantt() {
-    const start = document.getElementById('startDate').value;
-    const end = document.getElementById('endDate').value;
-    if (!start || !end) return;
+    const today = new Date();
+    const year = today.getFullYear();
+    const start = today.toISOString().split('T')[0];
+    const endDate = new Date(year, 9, 31); // 31 Ottobre
+    const end = endDate.toISOString().split('T')[0];
     fetch(`/dati-range/${start}/${end}`)
         .then(r => r.json())
         .then(data => {
@@ -20,17 +22,4 @@ function loadGantt() {
         });
 }
 
-document.getElementById('loadBtn').addEventListener('click', loadGantt);
-document.getElementById('startDate').addEventListener('change', loadGantt);
-document.getElementById('endDate').addEventListener('change', loadGantt);
-
-window.addEventListener('load', () => {
-    const today = new Date();
-    const start = today.toISOString().split('T')[0];
-    const next = new Date();
-    next.setDate(today.getDate() + 30);
-    const end = next.toISOString().split('T')[0];
-    document.getElementById('startDate').value = start;
-    document.getElementById('endDate').value = end;
-    loadGantt();
-});
+window.addEventListener('load', loadGantt);
