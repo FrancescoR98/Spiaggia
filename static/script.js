@@ -2,7 +2,7 @@
 const currentDate = new Date().toISOString().split("T")[0];
 
 let currentEl = null;
-const TOT_LETTINI = 50;
+const TOT_LETTINI = 70;
 let prenotazioniExtra = [];
 let prenotatiElementi = 0;
 let prenotatiExtra = 0;
@@ -260,9 +260,15 @@ document.getElementById("btn-salva-lettini").onclick = () => {
   const data = document.getElementById("datePicker").value;
 
   if (editingIndex !== null) {
-    prenotazioniExtra[editingIndex] = { nome, lettini: num };
+    if (num === 0) {
+      prenotazioniExtra.splice(editingIndex, 1);
+    } else {
+      prenotazioniExtra[editingIndex] = { nome, lettini: num };
+    }
   } else {
-    prenotazioniExtra.push({ nome, lettini: num });
+    if (num > 0) {
+      prenotazioniExtra.push({ nome, lettini: num });
+    }
   }
 
   fetch(`/lettini/${data}.json`, {

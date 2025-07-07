@@ -168,6 +168,10 @@
       width: 220px;
       display: flex;
       flex-direction: column;
+      background: white;
+      padding: 0.5rem;
+      border-radius: 8px;
+      box-shadow: 0 0 4px rgba(0,0,0,0.1);
     }
 
     #lettini-info {
@@ -186,12 +190,31 @@
 
     #tabella-lettini {
       border-collapse: collapse;
+      width: 100%;
+      background: #fff;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 0 4px rgba(0,0,0,0.1);
     }
 
     #tabella-lettini th,
     #tabella-lettini td {
       border: 1px solid #ccc;
       padding: 0.25rem 0.5rem;
+    }
+
+    #tabella-lettini th {
+      background-color: #007B8F;
+      color: white;
+    }
+
+    #tabella-lettini tbody tr:nth-child(even) {
+      background: #f7f7f7;
+    }
+
+    #tabella-lettini tbody tr:hover {
+      background: #e0f2f4;
+      cursor: pointer;
     }
 
     #btn-nuovo-lettino {
@@ -204,6 +227,11 @@
       background-color: #007B8F;
       color: white;
       cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    #btn-nuovo-lettino:hover {
+      background-color: #0099a8;
     }
   </style>
 </head>
@@ -282,6 +310,7 @@
       <input type="text" id="lettini-nome">
       <label>Lettini:</label>
       <select id="lettini-quantita">
+        <option value="0">0</option>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
