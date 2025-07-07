@@ -229,7 +229,9 @@ function salvaPrenotazione(dataInizio, dataFine) {
 
   Promise.all(richieste).finally(() => {
     document.getElementById("popup").style.display = "none";
-    caricaElementi(document.getElementById("datePicker").value);
+    const data = document.getElementById("datePicker").value;
+    caricaElementi(data);
+    caricaLettini(data);
   });
 }
 
