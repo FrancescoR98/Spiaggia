@@ -1,0 +1,42 @@
+[
+  {
+    "id": "ombrellone_8",
+    "stato": "libero",
+    "nome": ""
+  },
+  {
+    "id": "vela_1",
+    "stato": "libero",
+    "nome": ""
+  },
+  {
+    "id": "vela_3",
+    "stato": "libero",
+    "nome": ""
+  },
+  {
+    "id": "ombrellone_9",
+    "stato": "libero",
+    "nome": ""
+  },
+  {
+    "id": "ombrellone_1",
+    "stato": "occupato",
+    "nome": "no"
+  },
+  {
+    "id": "ombrellone_5",
+    "stato": "libero",
+    "nome": ""
+  },
+  {
+    "id": "ombrellone_4",
+    "stato": "libero",
+    "nome": ""
+  },
+  {
+    "id": "ombrellone_7",
+    "stato": "occupato",
+    "nome": "Elena "
+  }
+]

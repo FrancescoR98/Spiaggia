@@ -1,0 +1,137 @@
+[
+  {
+    "id": "vela_3",
+    "stato": "libero",
+    "nome": ""
+  },
+  {
+    "id": "ombrellone_1",
+    "stato": "occupato",
+    "nome": "no"
+  },
+  {
+    "id": "ombrellone_5",
+    "stato": "pagato",
+    "nome": "Alessia "
+  },
+  {
+    "id": "ombrellone_8",
+    "stato": "occupato",
+    "nome": "Armando"
+  },
+  {
+    "id": "ombrellone_7",
+    "stato": "occupato",
+    "nome": "Ruspi"
+  },
+  {
+    "id": "ombrellone_4",
+    "stato": "occupato",
+    "nome": "Marco"
+  },
+  {
+    "id": "ombrellone_6",
+    "stato": "occupato",
+    "nome": "Ferdinando luigi"
+  },
+  {
+    "id": "ombrellone_9",
+    "stato": "pagato",
+    "nome": "Gianfranco"
+  },
+  {
+    "id": "ombrellone_10",
+    "stato": "pagato",
+    "nome": "Stefano genna"
+  },
+  {
+    "id": "ombrellone_3",
+    "stato": "occupato",
+    "nome": "Marco"
+  },
+  {
+    "id": "ombrellone_11",
+    "stato": "pagato",
+    "nome": "Michela"
+  },
+  {
+    "id": "ombrellone_2",
+    "stato": "occupato",
+    "nome": "Anto"
+  },
+  {
+    "id": "ombrellone_13",
+    "stato": "pagato",
+    "nome": "Matteo"
+  },
+  {
+    "id": "ombrellone_12",
+    "stato": "pagato",
+    "nome": "Michela"
+  },
+  {
+    "id": "ombrellone_18",
+    "stato": "pagato",
+    "nome": "Edo"
+  },
+  {
+    "id": "ombrellone_19",
+    "stato": "pagato",
+    "nome": "Andrea"
+  },
+  {
+    "id": "ombrellone_23",
+    "stato": "occupato",
+    "nome": "Patrizia "
+  },
+  {
+    "id": "vela_7",
+    "stato": "occupato",
+    "nome": "Francesca"
+  },
+  {
+    "id": "vela_6",
+    "stato": "pagato",
+    "nome": "Andrea"
+  },
+  {
+    "id": "ombrellone_22",
+    "stato": "occupato",
+    "nome": "Marco"
+  },
+  {
+    "id": "ombrellone_20",
+    "stato": "pagato",
+    "nome": "Andrea"
+  },
+  {
+    "id": "ombrellone_21",
+    "stato": "occupato",
+    "nome": "Manuela"
+  },
+  {
+    "id": "vela_5",
+    "stato": "pagato",
+    "nome": ""
+  },
+  {
+    "id": "vela_4",
+    "stato": "pagato",
+    "nome": ""
+  },
+  {
+    "id": "ombrellone_14",
+    "stato": "pagato",
+    "nome": ""
+  },
+  {
+    "id": "ombrellone_15",
+    "stato": "pagato",
+    "nome": ""
+  },
+  {
+    "id": "ombrellone_24",
+    "stato": "pagato",
+    "nome": ""
+  }
+]

@@ -1,0 +1,37 @@
+[
+  {
+    "id": "ombrellone_1",
+    "stato": "occupato",
+    "nome": "no"
+  },
+  {
+    "id": "ombrellone_4",
+    "stato": "libero",
+    "nome": ""
+  },
+  {
+    "id": "ombrellone_5",
+    "stato": "pagato",
+    "nome": "Alessia "
+  },
+  {
+    "id": "ombrellone_10",
+    "stato": "pagato",
+    "nome": "Stefano genna"
+  },
+  {
+    "id": "ombrellone_6",
+    "stato": "occupato",
+    "nome": "Edoardo"
+  },
+  {
+    "id": "ombrellone_7",
+    "stato": "occupato",
+    "nome": "Edoardo"
+  },
+  {
+    "id": "ombrellone_20",
+    "stato": "libero",
+    "nome": ""
+  }
+]

@@ -1,0 +1,71 @@
+
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100%;
+}
+.map-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+#beach-map {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    position: relative;
+}
+#hotspots {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+}
+.elemento {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    color: black;
+}
+.elemento span.numero {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 0;
+    line-height: 60px;
+    font-size: 18px;
+    font-weight: bold;
+    pointer-events: none;
+}
+.modal {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.elemento span.nome {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 45px;
+    font-size: 14px;
+    color: black;
+    pointer-events: none;
+}
+

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Spiaggia Prenotazioni</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f0f4f8;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    header h1 {
+      margin: 0.5rem 0;
+      color: #007B8F;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+    }
+
+    .map-wrapper {
+      width: 100%;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      background: white;
+      position: relative;
+      overflow: auto;
+    }
+
+    .map-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    #beach-map {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    #hotspots.overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .elemento {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      text-align: center;
+    }
+
+    .elemento span.numero {
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      top: 0;
+      line-height: 60px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #000;
+    }
+
+    .elemento span.nome {
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      top: 45px;
+      font-size: 13px;
+      color: #444;
+      pointer-events: none;
+    }
+
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      width: 300px;
+      max-width: 90%;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .modal-content h2 {
+      margin-top: 0;
+    }
+
+    .modal-content input,
+    .modal-content select {
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .btn-group button {
+      padding: 0.5rem 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #btn-salva {
+      background-color: #007B8F;
+      color: white;
+    }
+
+    #popup-close {
+      background-color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+  <header>
+      <h1>Spiaggia Monkey's Beach</h1>
+      <div class="controls">
+        <label for="datePicker">Seleziona una data:</label>
+        <input type="date" id="datePicker" autocomplete="off"/>
+      </div>
+  </header>
+    <main class="map-wrapper">
+      <div class="map-container">
+        <img src="mappa_vuota.png" id="beach-map" alt="Mappa Spiaggia">
+        <div id="hotspots" class="overlay">      
+      </div>
+    </main>
+  </div>
+
+  <div id="popup" class="modal">
+    <div class="modal-content">
+      <h2>Modifica Prenotazione</h2>
+      <label>Nome cliente:</label>
+      <input type="text" id="input-nome">
+      <label for="data-inizio">Dal:</label>
+      <input type="date" id="data-inizio">
+
+      <label for="data-fine">Al:</label>
+      <input type="date" id="data-fine">
+      
+      <label>Stato:</label>
+      <select id="select-stato">
+        <option value="libero">Libero</option>
+        <option value="occupato">Occupato</option>
+        <option value="pagato">Pagato</option>
+      </select>
+      <div class="btn-group">
+        <button id="btn-salva">Salva</button>
+        <button id="popup-close">Chiudi</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

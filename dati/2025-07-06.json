@@ -1,0 +1,162 @@
+[
+  {
+    "id": "vela_3",
+    "stato": "libero",
+    "nome": ""
+  },
+  {
+    "id": "ombrellone_6",
+    "stato": "pagato",
+    "nome": "Andrea"
+  },
+  {
+    "id": "ombrellone_5",
+    "stato": "pagato",
+    "nome": "Alessia "
+  },
+  {
+    "id": "ombrellone_1",
+    "stato": "occupato",
+    "nome": "no"
+  },
+  {
+    "id": "ombrellone_7",
+    "stato": "occupato",
+    "nome": "Armando"
+  },
+  {
+    "id": "vela_7",
+    "stato": "occupato",
+    "nome": "Piera"
+  },
+  {
+    "id": "ombrellone_8",
+    "stato": "occupato",
+    "nome": "Ferdinando "
+  },
+  {
+    "id": "ombrellone_9",
+    "stato": "pagato",
+    "nome": ""
+  },
+  {
+    "id": "ombrellone_4",
+    "stato": "pagato",
+    "nome": "Anto"
+  },
+  {
+    "id": "ombrellone_2",
+    "stato": "occupato",
+    "nome": "Paolo"
+  },
+  {
+    "id": "ombrellone_3",
+    "stato": "pagato",
+    "nome": "Federica "
+  },
+  {
+    "id": "ombrellone_10",
+    "stato": "pagato",
+    "nome": "Stefano genna"
+  },
+  {
+    "id": "ombrellone_11",
+    "stato": "pagato",
+    "nome": "Angese"
+  },
+  {
+    "id": "ombrellone_12",
+    "stato": "pagato",
+    "nome": "Agnese"
+  },
+  {
+    "id": "vela_1",
+    "stato": "pagato",
+    "nome": "Benedetto"
+  },
+  {
+    "id": "ombrellone_16",
+    "stato": "pagato",
+    "nome": "Federica "
+  },
+  {
+    "id": "ombrellone_13",
+    "stato": "occupato",
+    "nome": "Cristina "
+  },
+  {
+    "id": "vela_2",
+    "stato": "pagato",
+    "nome": "Sandro"
+  },
+  {
+    "id": "ombrellone_19",
+    "stato": "pagato",
+    "nome": "Alessandra "
+  },
+  {
+    "id": "ombrellone_20",
+    "stato": "pagato",
+    "nome": "Alessandra "
+  },
+  {
+    "id": "ombrellone_14",
+    "stato": "occupato",
+    "nome": "Claudio "
+  },
+  {
+    "id": "vela_6",
+    "stato": "occupato",
+    "nome": "Francesca"
+  },
+  {
+    "id": "ombrellone_21",
+    "stato": "pagato",
+    "nome": ""
+  },
+  {
+    "id": "vela_5",
+    "stato": "pagato",
+    "nome": "Michela"
+  },
+  {
+    "id": "ombrellone_23",
+    "stato": "libero",
+    "nome": ""
+  },
+  {
+    "id": "ombrellone_22",
+    "stato": "occupato",
+    "nome": "Troisi"
+  },
+  {
+    "id": "ombrellone_18",
+    "stato": "occupato",
+    "nome": "Vincenzo "
+  },
+  {
+    "id": "ombrellone_15",
+    "stato": "pagato",
+    "nome": ""
+  },
+  {
+    "id": "ombrellone_24",
+    "stato": "occupato",
+    "nome": "Rita"
+  },
+  {
+    "id": "vela_4",
+    "stato": "pagato",
+    "nome": ""
+  },
+  {
+    "id": "ombrellone_25",
+    "stato": "pagato",
+    "nome": ""
+  },
+  {
+    "id": "ombrellone_17",
+    "stato": "pagato",
+    "nome": ""
+  }
+]
