@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, send_from_directory
 import os
 import json
+from datetime import datetime, timedelta
 
 app = Flask(__name__, static_folder='static', static_url_path='')
 
@@ -71,6 +72,72 @@ def gestisci_lettini(data):
             return jsonify({"status": "success"}), 200
         else:
             return jsonify({"status": "error", "message": "Formato dati non valido"}), 400
+
+@app.route('/calendar')
+def calendar_page():
+    return send_from_directory('static', 'calendar.html')
+
+@app.route('/dati-range/<start>/<end>')
+def dati_range(start, end):
+    try:
+        start_date = datetime.fromisoformat(start).date()
+        end_date = datetime.fromisoformat(end).date()
+    except ValueError:
+        return jsonify([])
+
+    tasks = []
+    open_tasks = {}
+    day = start_date
+    counter = 0
+
+    while day <= end_date:
+        fname = os.path.join('dati', f"{day.isoformat()}.json")
+        if os.path.exists(fname):
+            try:
+                with open(fname, 'r', encoding='utf-8') as f:
+                    records = {r['id']: r for r in json.load(f)}
+            except Exception:
+                records = {}
+        else:
+            records = {}
+
+        # close or extend existing tasks
+        for uid in list(open_tasks.keys()):
+            rec = records.get(uid)
+            ot = open_tasks[uid]
+            if rec and rec.get('nome') == ot['nome'] and rec.get('stato') == ot['stato']:
+                ot['end'] = day.isoformat()
+            else:
+                tasks.append(ot)
+                del open_tasks[uid]
+
+        # open new tasks
+        for rec in records.values():
+            nome = rec.get('nome') or ''
+            stato = rec.get('stato')
+            if nome and stato != 'libero' and rec['id'] not in open_tasks:
+                open_tasks[rec['id']] = {
+                    'id': f"{rec['id']}_{counter}",
+                    'name': f"{nome} ({rec['id']})",
+                    'start': day.isoformat(),
+                    'end': day.isoformat(),
+                    'stato': stato
+                }
+                counter += 1
+
+        day += timedelta(days=1)
+
+    tasks.extend(open_tasks.values())
+
+    # make end date inclusive for gantt
+    for t in tasks:
+        try:
+            e = datetime.fromisoformat(t['end']) + timedelta(days=1)
+            t['end'] = e.date().isoformat()
+        except Exception:
+            pass
+
+    return jsonify(tasks)
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=5000)

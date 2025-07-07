@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Calendario Prenotazioni</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/frappe-gantt/0.6.1/frappe-gantt.css"/>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 1rem; }
+        #controls { margin-bottom: 1rem; }
+    </style>
+</head>
+<body>
+<div id="controls">
+    Dal: <input type="date" id="startDate">
+    Al: <input type="date" id="endDate">
+    <button id="loadBtn">Carica</button>
+    <a href="/" style="margin-left:20px;">Torna alla mappa</a>
+</div>
+<div id="gantt"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/frappe-gantt/0.6.1/frappe-gantt.min.js"></script>
+<script src="calendar.js"></script>
+</body>
+</html>
