@@ -53,5 +53,24 @@ def gestisci_json(data):
 
         return jsonify({"status": "success"}), 200
 
+@app.route('/lettini/<data>.json', methods=['GET', 'POST'])
+def gestisci_lettini(data):
+    percorso = os.path.join('dati', f"lettini_{data}.json")
+
+    if request.method == 'GET':
+        if os.path.exists(percorso):
+            return send_from_directory('dati', f"lettini_{data}.json")
+        else:
+            return jsonify([])
+
+    elif request.method == 'POST':
+        pren = request.get_json()
+        if isinstance(pren, list):
+            with open(percorso, 'w', encoding='utf-8') as f:
+                json.dump(pren, f, ensure_ascii=False, indent=2)
+            return jsonify({"status": "success"}), 200
+        else:
+            return jsonify({"status": "error", "message": "Formato dati non valido"}), 400
+
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=5000)

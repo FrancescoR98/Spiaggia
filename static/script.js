@@ -2,6 +2,11 @@
 const currentDate = new Date().toISOString().split("T")[0];
 
 let currentEl = null;
+const TOT_LETTINI = 70;
+let prenotazioniExtra = [];
+let prenotatiElementi = 0;
+let prenotatiExtra = 0;
+let editingIndex = null;
 
 const elementi = [
   { id: "ombrellone_1", xPerc: 2.5, yPerc: 37.5, tipo: "ombrellone", stato: "libero", numero: "1" },
@@ -43,11 +48,13 @@ const hotspotContainer = document.getElementById("hotspots");
 // Popola gli elementi sulla mappa
   function caricaElementi(data) {
     hotspotContainer.innerHTML = "";
+    prenotatiElementi = 0;
 
     // reset default state before applying data for the new date
     elementi.forEach(el => {
       el.stato = "libero";
       el.nome = "";
+      el.lettini = 0;
     });
 
     fetch(`dati/${data}.json`, { cache: "no-store" })
@@ -61,6 +68,7 @@ const hotspotContainer = document.getElementById("hotspots");
         if (el) {
           el.stato = d.stato;
           el.nome = d.nome;
+          el.lettini = d.lettini || 0;
         }
       });
     })
@@ -120,6 +128,7 @@ const hotspotContainer = document.getElementById("hotspots");
         div.dataset.tipo = el.tipo;
         div.dataset.stato = el.stato;
         div.dataset.nome = el.nome || "";
+        div.dataset.lettini = el.lettini || 0;
 
         div.onclick = function () {
           currentEl = this;
@@ -130,20 +139,67 @@ const hotspotContainer = document.getElementById("hotspots");
           document.getElementById("popup").style.display = "flex";
           document.getElementById("select-stato").value = this.dataset.stato;
           document.getElementById("input-nome").value = this.dataset.nome || "";
+          document.getElementById("select-lettini").value = this.dataset.lettini || 0;
         };
 
         hotspotContainer.appendChild(div);
+        prenotatiElementi += el.lettini || 0;
       });
     });
-}
+    updateDisponibilita();
+  }
 
 function getImgPath(tipo, stato) {
   return `${tipo}_${stato}.png`;
 }
 
+function updateDisponibilita() {
+  const disponibili = TOT_LETTINI - prenotatiElementi - prenotatiExtra;
+  document.getElementById("lettini-disponibili").textContent = disponibili;
+}
+
+  function renderLettiniTable() {
+    const tbody = document.querySelector("#tabella-lettini tbody");
+    tbody.innerHTML = "";
+    prenotatiExtra = 0;
+    prenotazioniExtra.forEach((p, idx) => {
+      const tr = document.createElement("tr");
+      tr.dataset.index = idx;
+      const tdN = document.createElement("td");
+      tdN.textContent = p.nome;
+      const tdL = document.createElement("td");
+      tdL.textContent = p.lettini;
+      tr.appendChild(tdN);
+      tr.appendChild(tdL);
+      tr.onclick = () => {
+        editingIndex = idx;
+        document.getElementById("lettini-nome").value = p.nome;
+        document.getElementById("lettini-quantita").value = p.lettini;
+        document.getElementById("popup-lettini").style.display = "flex";
+      };
+      tbody.appendChild(tr);
+      prenotatiExtra += Number(p.lettini) || 0;
+    });
+    updateDisponibilita();
+  }
+
+  function caricaLettini(data) {
+    prenotazioniExtra = [];
+    fetch(`lettini/${data}.json`, { cache: "no-store" })
+      .then(r => r.ok ? r.json() : [])
+      .then(arr => {
+        prenotazioniExtra = arr.filter(p => Number(p.lettini) > 0);
+      })
+      .catch(() => { prenotazioniExtra = []; })
+      .finally(() => {
+        renderLettiniTable();
+      });
+  }
+
 function salvaPrenotazione(dataInizio, dataFine) {
   const nome = document.getElementById("input-nome").value;
   const stato = document.getElementById("select-stato").value;
+  const lettini = parseInt(document.getElementById("select-lettini").value, 10);
 
   const inizio = new Date(dataInizio);
   const fine = new Date(dataFine);
@@ -156,7 +212,8 @@ function salvaPrenotazione(dataInizio, dataFine) {
     aggiornamenti[dataStr].push({
       id: currentEl.id,
       stato,
-      nome
+      nome,
+      lettini
     });
   }
 
@@ -188,10 +245,55 @@ document.getElementById("popup-close").onclick = () => {
   document.getElementById("popup").style.display = "none";
 };
 
+const btnNuovoLettino = document.getElementById("btn-nuovo-lettino");
+btnNuovoLettino.onclick = () => {
+  editingIndex = null;
+  document.getElementById("lettini-nome").value = "";
+  document.getElementById("lettini-quantita").value = "1";
+  document.getElementById("popup-lettini").style.display = "flex";
+};
+
+document.getElementById("lettini-popup-close").onclick = () => {
+  document.getElementById("popup-lettini").style.display = "none";
+  editingIndex = null;
+};
+
+document.getElementById("btn-salva-lettini").onclick = () => {
+  const nome = document.getElementById("lettini-nome").value;
+  const num = parseInt(document.getElementById("lettini-quantita").value, 10);
+  const data = document.getElementById("datePicker").value;
+
+  if (editingIndex !== null) {
+    if (num === 0) {
+      prenotazioniExtra.splice(editingIndex, 1);
+    } else {
+      prenotazioniExtra[editingIndex] = { nome, lettini: num };
+    }
+  } else {
+    if (num > 0) {
+      prenotazioniExtra.push({ nome, lettini: num });
+    }
+  }
+
+  prenotazioniExtra = prenotazioniExtra.filter(p => Number(p.lettini) > 0);
+  renderLettiniTable();
+
+  fetch(`/lettini/${data}.json`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(prenotazioniExtra)
+  }).finally(() => {
+    document.getElementById("popup-lettini").style.display = "none";
+    caricaLettini(data);
+    editingIndex = null;
+  });
+};
+
 // Cambio data
   document.getElementById("datePicker").addEventListener("change", function () {
    // localStorage.setItem("selectedDate", this.value);
     caricaElementi(this.value);
+    caricaLettini(this.value);
   });
 
 // Inizializzazione
@@ -202,5 +304,6 @@ document.getElementById("popup-close").onclick = () => {
     //caricaElementi(initDate);
     document.getElementById("datePicker").value = currentDate;
     caricaElementi(currentDate);
+    caricaLettini(currentDate);
   };
 

@@ -158,6 +158,81 @@
     #popup-close {
       background-color: #ccc;
     }
+
+    #main-flex {
+      display: flex;
+      gap: 1rem;
+    }
+
+    #side-panel {
+      width: 220px;
+      display: flex;
+      flex-direction: column;
+      background: white;
+      padding: 0.5rem;
+      border-radius: 8px;
+      box-shadow: 0 0 4px rgba(0,0,0,0.1);
+    }
+
+    #lettini-info {
+      text-align: center;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+
+    #lettini-panel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    #tabella-lettini {
+      border-collapse: collapse;
+      width: 100%;
+      background: #fff;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 0 4px rgba(0,0,0,0.1);
+    }
+
+    #tabella-lettini th,
+    #tabella-lettini td {
+      border: 1px solid #ccc;
+      padding: 0.25rem 0.5rem;
+    }
+
+    #tabella-lettini th {
+      background-color: #007B8F;
+      color: white;
+    }
+
+    #tabella-lettini tbody tr:nth-child(even) {
+      background: #f7f7f7;
+    }
+
+    #tabella-lettini tbody tr:hover {
+      background: #e0f2f4;
+      cursor: pointer;
+    }
+
+    #btn-nuovo-lettino {
+      padding: 0.5rem;
+      font-size: 1.5rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      background-color: #007B8F;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    #btn-nuovo-lettino:hover {
+      background-color: #0099a8;
+    }
   </style>
 </head>
 <body>
@@ -169,12 +244,25 @@
         <input type="date" id="datePicker" autocomplete="off"/>
       </div>
   </header>
+  <div id="main-flex">
     <main class="map-wrapper">
       <div class="map-container">
         <img src="mappa_vuota.png" id="beach-map" alt="Mappa Spiaggia">
-        <div id="hotspots" class="overlay">      
+        <div id="hotspots" class="overlay">
       </div>
     </main>
+    <aside id="side-panel">
+      <div id="lettini-info">Lettini disponibili: <span id="lettini-disponibili">0</span></div>
+      <div id="lettini-panel">
+        <table id="tabella-lettini">
+        <thead>
+          <tr><th>Cliente</th><th>Lettini</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <button id="btn-nuovo-lettino">+</button>
+      </div>
+    </aside>
   </div>
 
   <div id="popup" class="modal">
@@ -194,9 +282,49 @@
         <option value="occupato">Occupato</option>
         <option value="pagato">Pagato</option>
       </select>
+      <label>Lettini:</label>
+      <select id="select-lettini">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+      </select>
       <div class="btn-group">
         <button id="btn-salva">Salva</button>
         <button id="popup-close">Chiudi</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="popup-lettini" class="modal">
+    <div class="modal-content">
+      <h2>Prenota Lettini</h2>
+      <label>Nome cliente:</label>
+      <input type="text" id="lettini-nome">
+      <label>Lettini:</label>
+      <select id="lettini-quantita">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+      </select>
+      <div class="btn-group">
+        <button id="btn-salva-lettini">Salva</button>
+        <button id="lettini-popup-close">Chiudi</button>
       </div>
     </div>
   </div>
