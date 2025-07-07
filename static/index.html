@@ -159,9 +159,20 @@
       background-color: #ccc;
     }
 
+    #main-flex {
+      display: flex;
+      gap: 1rem;
+    }
+
+    #side-panel {
+      width: 220px;
+      display: flex;
+      flex-direction: column;
+    }
+
     #lettini-info {
       text-align: center;
-      margin-top: 1rem;
+      margin-bottom: 0.5rem;
       font-weight: bold;
     }
 
@@ -184,8 +195,15 @@
     }
 
     #btn-nuovo-lettino {
-      padding: 0.25rem 0.5rem;
-      font-size: 1.2rem;
+      padding: 0.5rem;
+      font-size: 1.5rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      background-color: #007B8F;
+      color: white;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -198,22 +216,25 @@
         <input type="date" id="datePicker" autocomplete="off"/>
       </div>
   </header>
+  <div id="main-flex">
     <main class="map-wrapper">
       <div class="map-container">
         <img src="mappa_vuota.png" id="beach-map" alt="Mappa Spiaggia">
-        <div id="hotspots" class="overlay">      
+        <div id="hotspots" class="overlay">
       </div>
     </main>
-    <div id="lettini-info">Lettini disponibili: <span id="lettini-disponibili">0</span></div>
-    <div id="lettini-panel">
-      <table id="tabella-lettini">
+    <aside id="side-panel">
+      <div id="lettini-info">Lettini disponibili: <span id="lettini-disponibili">0</span></div>
+      <div id="lettini-panel">
+        <table id="tabella-lettini">
         <thead>
           <tr><th>Cliente</th><th>Lettini</th></tr>
         </thead>
         <tbody></tbody>
       </table>
       <button id="btn-nuovo-lettino">+</button>
-    </div>
+      </div>
+    </aside>
   </div>
 
   <div id="popup" class="modal">

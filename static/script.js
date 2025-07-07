@@ -6,6 +6,7 @@ const TOT_LETTINI = 50;
 let prenotazioniExtra = [];
 let prenotatiElementi = 0;
 let prenotatiExtra = 0;
+let editingIndex = null;
 
 const elementi = [
   { id: "ombrellone_1", xPerc: 2.5, yPerc: 37.5, tipo: "ombrellone", stato: "libero", numero: "1" },
@@ -169,14 +170,21 @@ function caricaLettini(data) {
     .finally(() => {
       const tbody = document.querySelector("#tabella-lettini tbody");
       tbody.innerHTML = "";
-      prenotazioniExtra.forEach(p => {
+      prenotazioniExtra.forEach((p, idx) => {
         const tr = document.createElement("tr");
+        tr.dataset.index = idx;
         const tdN = document.createElement("td");
         tdN.textContent = p.nome;
         const tdL = document.createElement("td");
         tdL.textContent = p.lettini;
         tr.appendChild(tdN);
         tr.appendChild(tdL);
+        tr.onclick = () => {
+          editingIndex = idx;
+          document.getElementById("lettini-nome").value = p.nome;
+          document.getElementById("lettini-quantita").value = p.lettini;
+          document.getElementById("popup-lettini").style.display = "flex";
+        };
         tbody.appendChild(tr);
         prenotatiExtra += Number(p.lettini) || 0;
       });
@@ -235,6 +243,7 @@ document.getElementById("popup-close").onclick = () => {
 
 const btnNuovoLettino = document.getElementById("btn-nuovo-lettino");
 btnNuovoLettino.onclick = () => {
+  editingIndex = null;
   document.getElementById("lettini-nome").value = "";
   document.getElementById("lettini-quantita").value = "1";
   document.getElementById("popup-lettini").style.display = "flex";
@@ -242,13 +251,20 @@ btnNuovoLettino.onclick = () => {
 
 document.getElementById("lettini-popup-close").onclick = () => {
   document.getElementById("popup-lettini").style.display = "none";
+  editingIndex = null;
 };
 
 document.getElementById("btn-salva-lettini").onclick = () => {
   const nome = document.getElementById("lettini-nome").value;
   const num = parseInt(document.getElementById("lettini-quantita").value, 10);
   const data = document.getElementById("datePicker").value;
-  prenotazioniExtra.push({ nome, lettini: num });
+
+  if (editingIndex !== null) {
+    prenotazioniExtra[editingIndex] = { nome, lettini: num };
+  } else {
+    prenotazioniExtra.push({ nome, lettini: num });
+  }
+
   fetch(`/lettini/${data}.json`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -256,6 +272,7 @@ document.getElementById("btn-salva-lettini").onclick = () => {
   }).finally(() => {
     document.getElementById("popup-lettini").style.display = "none";
     caricaLettini(data);
+    editingIndex = null;
   });
 };
 
