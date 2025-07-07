@@ -7,17 +7,22 @@ function loadGantt() {
         .then(data => {
             document.getElementById('gantt').innerHTML = '';
             const tasks = data.map((t, idx) => ({
-                id: t.id || ('t'+idx),
+                id: t.id || ('t' + idx),
                 name: t.name,
                 start: t.start,
                 end: t.end,
                 custom_class: t.stato
             }));
-            new Gantt('#gantt', tasks);
+            new Gantt('#gantt', tasks, {
+                view_mode: 'Day',
+                language: 'it'
+            });
         });
 }
 
 document.getElementById('loadBtn').addEventListener('click', loadGantt);
+document.getElementById('startDate').addEventListener('change', loadGantt);
+document.getElementById('endDate').addEventListener('change', loadGantt);
 
 window.addEventListener('load', () => {
     const today = new Date();

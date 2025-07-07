@@ -7,6 +7,9 @@
     <style>
         body { font-family: Arial, sans-serif; margin: 0; padding: 1rem; }
         #controls { margin-bottom: 1rem; }
+        #gantt { overflow-x: auto; }
+        .bar-occupato { fill: #f0ad4e; }
+        .bar-pagato { fill: #5cb85c; }
     </style>
 </head>
 <body>
@@ -15,6 +18,10 @@
     Al: <input type="date" id="endDate">
     <button id="loadBtn">Carica</button>
     <a href="/" style="margin-left:20px;">Torna alla mappa</a>
+</div>
+<div id="legend" style="margin-bottom:10px;">
+    <span style="display:inline-block;width:12px;height:12px;background:#f0ad4e;"></span> Occupato
+    <span style="display:inline-block;width:12px;height:12px;background:#5cb85c;margin-left:10px;"></span> Pagato
 </div>
 <div id="gantt"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/frappe-gantt/0.6.1/frappe-gantt.min.js"></script>

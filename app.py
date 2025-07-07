@@ -121,7 +121,8 @@ def dati_range(start, end):
                     'name': f"{nome} ({rec['id']})",
                     'start': day.isoformat(),
                     'end': day.isoformat(),
-                    'stato': stato
+                    'stato': stato,
+                    'nome': nome
                 }
                 counter += 1
 
