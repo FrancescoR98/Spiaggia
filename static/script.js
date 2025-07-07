@@ -145,8 +145,8 @@ const hotspotContainer = document.getElementById("hotspots");
         hotspotContainer.appendChild(div);
         prenotatiElementi += el.lettini || 0;
       });
+      updateDisponibilita();
     });
-    updateDisponibilita();
   }
 
 function getImgPath(tipo, stato) {
